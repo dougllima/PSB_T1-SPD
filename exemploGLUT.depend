@@ -1,0 +1,349 @@
+# depslib dependency file v1.0
+1298987053 source:c:\users\10049190\downloads\elevator_work\exemploglut\main.cpp
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+
+1268256196 
+
+1298986598 c:\users\10049190\downloads\elevator_work\exemploglut\include\gl\glut.h
+	"freeglut.h"
+
+1378937033 h"
+
+1298986598 c:\users\10049190\downloads\elevator_work\exemploglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1298986600 ext.h"
+
+1298986598 c:\users\10049190\downloads\elevator_work\exemploglut\include\gl\freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1228527132 c:\program files\codeblocks\mingw\include\windows.h
+	<winresrc.h>
+	<stdarg.h>
+	<windef.h>
+	<wincon.h>
+	<winbase.h>
+	<wingdi.h>
+	<winuser.h>
+	<winnls.h>
+	<winver.h>
+	<winnetwk.h>
+	<winreg.h>
+	<winsvc.h>
+	<cderr.h>
+	<dde.h>
+	<ddeml.h>
+	<dlgs.h>
+	<imm.h>
+	<lzexpand.h>
+	<mmsystem.h>
+	<nb30.h>
+	<rpc.h>
+	<shellapi.h>
+	<winperf.h>
+	<commdlg.h>
+	<winspool.h>
+	<winsock2.h>
+	<winsock.h>
+	<ole2.h>
+
+1228527132 c:\program files\codeblocks\mingw\include\winresrc.h
+	<winuser.h>
+	<winnt.h>
+	<winver.h>
+	<dde.h>
+	<dlgs.h>
+	<commctrl.h>
+
+1228527124 h>
+
+1228527134 c:\program files\codeblocks\mingw\include\winuser.h
+
+1228527132 c:\program files\codeblocks\mingw\include\winnt.h
+	<winerror.h>
+	<string.h>
+	<basetsd.h>
+	<pshpack4.h>
+	<poppack.h>
+
+1228527132 >
+
+1228527132 c:\program files\codeblocks\mingw\include\winerror.h
+
+1250308680 c:\program files\codeblocks\mingw\include\string.h
+	<_mingw.h>
+	<stddef.h>
+
+1250308674 c:\program files\codeblocks\mingw\include\_mingw.h
+
+1228527112 c:\program files\codeblocks\mingw\include\basetsd.h
+
+1228527124 c:\program files\codeblocks\mingw\include\pshpack4.h
+
+1228527124 c:\program files\codeblocks\mingw\include\poppack.h
+
+1228527134 c:\program files\codeblocks\mingw\include\winver.h
+
+1228527114 c:\program files\codeblocks\mingw\include\dde.h
+
+1228527114 c:\program files\codeblocks\mingw\include\dlgs.h
+
+1228527114 c:\program files\codeblocks\mingw\include\commctrl.h
+	<prsht.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\prsht.h
+
+1228527132 c:\program files\codeblocks\mingw\include\windef.h
+	<winnt.h>
+
+1228527132 c:\program files\codeblocks\mingw\include\wincon.h
+
+1228527130 c:\program files\codeblocks\mingw\include\winbase.h
+
+1228527132 c:\program files\codeblocks\mingw\include\wingdi.h
+
+1228527132 c:\program files\codeblocks\mingw\include\winnls.h
+
+1228527132 c:\program files\codeblocks\mingw\include\winnetwk.h
+
+1228527132 c:\program files\codeblocks\mingw\include\winreg.h
+
+1228527134 c:\program files\codeblocks\mingw\include\winsvc.h
+
+1228527112 c:\program files\codeblocks\mingw\include\cderr.h
+
+1228527114 c:\program files\codeblocks\mingw\include\ddeml.h
+
+1228527116 c:\program files\codeblocks\mingw\include\imm.h
+
+1228527120 c:\program files\codeblocks\mingw\include\lzexpand.h
+
+1228527122 c:\program files\codeblocks\mingw\include\mmsystem.h
+
+1228527122 c:\program files\codeblocks\mingw\include\nb30.h
+
+1228527126 c:\program files\codeblocks\mingw\include\rpc.h
+	<windows.h>
+	<rpcdce.h>
+	<rpcnsi.h>
+	<rpcnterr.h>
+	<winerror.h>
+	<excpt.h>
+
+1228527126 c:\program files\codeblocks\mingw\include\rpcdce.h
+	<basetyps.h>
+	<rpcdcep.h>
+
+1228527112 c:\program files\codeblocks\mingw\include\basetyps.h
+
+1228527128 c:\program files\codeblocks\mingw\include\rpcdcep.h
+
+1228527128 c:\program files\codeblocks\mingw\include\rpcnsi.h
+
+1228527128 c:\program files\codeblocks\mingw\include\rpcnterr.h
+
+1250308676 c:\program files\codeblocks\mingw\include\excpt.h
+	<_mingw.h>
+	<windef.h>
+
+1228527128 c:\program files\codeblocks\mingw\include\shellapi.h
+	<pshpack2.h>
+	<poppack.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\pshpack2.h
+
+1228527132 c:\program files\codeblocks\mingw\include\winperf.h
+
+1228527114 c:\program files\codeblocks\mingw\include\commdlg.h
+	<unknwn.h>
+	<prsht.h>
+
+1228527130 c:\program files\codeblocks\mingw\include\unknwn.h
+	<windows.h>
+	<objfwd.h>
+	<wtypes.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\objfwd.h
+	<basetyps.h>
+
+1228527134 c:\program files\codeblocks\mingw\include\wtypes.h
+	<rpc.h>
+	<rpcndr.h>
+
+1228527128 c:\program files\codeblocks\mingw\include\rpcndr.h
+	<rpcnsip.h>
+	<objfwd.h>
+
+1228527128 c:\program files\codeblocks\mingw\include\rpcnsip.h
+
+1228527134 c:\program files\codeblocks\mingw\include\winspool.h
+
+1228527134 c:\program files\codeblocks\mingw\include\winsock2.h
+	<windows.h>
+
+1228527132 c:\program files\codeblocks\mingw\include\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1228527122 c:\program files\codeblocks\mingw\include\mswsock.h
+
+1228527124 c:\program files\codeblocks\mingw\include\ole2.h
+	<winerror.h>
+	<objbase.h>
+	<olectlid.h>
+	<oleauto.h>
+	<oleidl.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\objbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<stdlib.h>
+	<basetyps.h>
+	<wtypes.h>
+	<unknwn.h>
+	<objidl.h>
+	<cguid.h>
+
+1250308680 c:\program files\codeblocks\mingw\include\stdlib.h
+	<_mingw.h>
+	<stddef.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\objidl.h
+	<objfwd.h>
+
+1228527112 c:\program files\codeblocks\mingw\include\cguid.h
+
+1228527124 c:\program files\codeblocks\mingw\include\olectlid.h
+
+1228527124 c:\program files\codeblocks\mingw\include\oleauto.h
+	<oaidl.h>
+
+1228527122 c:\program files\codeblocks\mingw\include\oaidl.h
+	<windows.h>
+	<ole2.h>
+
+1228527124 c:\program files\codeblocks\mingw\include\oleidl.h
+	<objfwd.h>
+
+1228527134 c:\program files\codeblocks\mingw\include\gl\gl.h
+
+1228527134 c:\program files\codeblocks\mingw\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1298986598 c:\users\10049190\downloads\elevator_work\exemploglut\include\gl\freeglut_ext.h
+
+1268256196 source:c:\documents and settings\10033421\desktop\exemploglut\imageclassnew2.cpp
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<math.h>
+	<GL\gl.h>
+	"ImageClassNew2.h"
+	"BmpLib0.h"
+
+1268256196 "
+
+1250308680 c:\program files\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1250308680 .h>
+
+1250308682 c:\program files\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1250308678 c:\program files\codeblocks\mingw\include\math.h
+	<_mingw.h>
+
+1268256196 c:\documents and settings\10033421\desktop\exemploglut\imageclassnew2.h
+	<GL\gl.h>
+
+1268256196 c:\documents and settings\10033421\desktop\exemploglut\bmplib0.h
+
+1268256196 source:c:\documents and settings\10033421\desktop\exemploglut\bmplib0.cpp
+	<stdio.h>
+	<malloc.h>
+	"BmpLib0.h"
+
+1250308678 c:\program files\codeblocks\mingw\include\malloc.h
+	<_mingw.h>
+	<stdlib.h>
+
+1378923381 source:d:\doc\opengl3d\teste3d.cpp
+	<stdio.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<gl/glut.h>
+	<stdlib.h>
+
+1298986600 d:\doc\opengl3d\include\gl\glut.h
+	"freeglut.h"
+
+1298986600 d:\doc\opengl3d\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1298986600 d:\doc\opengl3d\include\gl\freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1298986600 d:\doc\opengl3d\include\gl\freeglut_ext.h
+
+1378937033 source:d:\doc\opengl3d\desenhapontos-linhas.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<gl/gl.h>
+	<gl/glu.h>
+	<gl/glut.h>
+	"Ponto.h"
+	"Segmento.h"
+
+1378935841 d:\doc\opengl3d\ponto.h
+
+1378936224 d:\doc\opengl3d\segmento.h
+
+1379107698 source:/home/PORTOALEGRE/10049190/lapro2ec/exemploglut/DesenhaPontos-Linhas.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<GL/glut.h>
+	"Ponto.h"
+	"Segmento.h"
+
+1298986600 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/include/GL/glut.h
+	"freeglut.h"
+
+1298986600 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/include/GL/freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1298986600 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1298986600 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/include/GL/freeglut_ext.h
+
+1378935842 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/Ponto.h
+
+1378936224 /home/PORTOALEGRE/10049190/lapro2ec/exemploglut/Segmento.h
+
+1472847403 source:/home/PORTOALEGRE/10049190/Downloads/spdviewer/main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
