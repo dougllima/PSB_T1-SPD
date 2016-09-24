@@ -27,8 +27,10 @@ void loadFileAndInitializeVars() {
 
     //3rd line (START)
     fgets(line, TAM_LINE -1, fp);
-    char* start;
+    char *start;
     start = getNextValue(&line, 1);
+
+    printf("start: %s\n", start);
 
 
     //4th line (END)

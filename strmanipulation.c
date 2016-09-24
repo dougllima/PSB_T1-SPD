@@ -5,22 +5,28 @@
 #include "global.h"
 
 char* getNextValue(char* line, int spacesToIgnore) {
-    int i = 0;
+    char* ref = line;
+    char* tok;
 
     do {
         //find the first occurence of blank space
-        line = strchr(line, ' ');
+        ref = strchr(ref, ' ');
 
         //in case we didn't find, break the loop
-        if (line == NULL) break;
+        if (ref == NULL) break;
 
         //move one memory position to avoid the blank space
-        line += 0x1;
-        i++;
+        ref++;
+        spacesToIgnore--;
     }
-    while(i < spacesToIgnore);
+    while(spacesToIgnore > 0);
 
-    printf("line: %s\n", line);
+    //after here, we do know where the string should start
 
-    return line;
+    //get the entire string until we find either a blank space or a new line
+    tok = strtok(ref, " ");
+    tok = strtok(ref, "\n");
+
+    //copy the string and produce a new one
+    return strdup(tok);
 }

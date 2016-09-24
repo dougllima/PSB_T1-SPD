@@ -371,6 +371,8 @@ int main ( int argc, char** argv ) {
     checkFilePath();
     loadFileAndInitializeVars();
 
+    //exit(0);
+
     glutInit            ( &argc, argv );
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
     glutInitWindowPosition (0,0);
@@ -428,6 +430,3 @@ int main ( int argc, char** argv ) {
     // inicia o tratamento dos eventos
     glutMainLoop ( );
 }
-
-
-

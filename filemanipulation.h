@@ -4,3 +4,4 @@ void checkFilePath();
 int isValidFile(char file[]);
 void loadFileAndInitializeVars();
 
+
