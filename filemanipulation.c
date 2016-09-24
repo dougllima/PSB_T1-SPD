@@ -4,9 +4,9 @@
 #include "strmanipulation.h"
 
 char relativeSPDFilePath[TAM_STRING] = "examples/small.spd";
-Segmento** segments;
-int numberOfFrames;
-int numberOfSegments;
+
+Segments G_S;
+Frames G_F;
 
 int isValidFile(char file[]) {
     FILE* fp = fopen(file, "r");
@@ -32,7 +32,19 @@ int getIntFromLine(char* line, int blankSpaces) {
     retValue = atoi(value);
 
     return retValue;
+}
 
+double getDoubleFromLine(char* line, int blankSpaces) {
+    char* value;
+    double retValue;
+
+    //get value in line
+    value = getNextValue(line, blankSpaces);
+
+    //parse
+    retValue = atof(value);
+
+    return retValue;
 }
 
 void loadNumberOfFrames(FILE* fp) {
@@ -42,9 +54,12 @@ void loadNumberOfFrames(FILE* fp) {
     fgets(line, TAM_LINE -1, fp);
 
     //parse to int
-    numberOfFrames = getIntFromLine(&line, 2);
+    G_F.numberOfFrames = getIntFromLine(&line, 2);
 
-    printf("frames: %d\n", numberOfFrames);
+    //alloc memory space to handle it
+    G_F.frames = malloc(G_F.numberOfFrames * sizeof(Frame*));
+
+    printf("frames: %d\n", G_F.numberOfFrames);
 }
 
 void loadNumberOfSegments(FILE* fp) {
@@ -54,18 +69,62 @@ void loadNumberOfSegments(FILE* fp) {
     fgets(line, TAM_LINE -1, fp);
 
     //parse to int
-    numberOfSegments = getIntFromLine(&line, 1);
+    G_S.numberOfSegments = getIntFromLine(&line, 1);
 
     //alloc memory space to handle it
-    segments = malloc(numberOfSegments * sizeof(Segmento));
+    G_S.segments = malloc(G_S.numberOfSegments * sizeof(Segmento*));
 
-    printf("segments: %d\n", numberOfSegments);
+    printf("segments: %d\n", G_S.numberOfSegments);
+}
+
+void loadMarkersOfFrame(Frame* frame, char* line) {
+    int initialPosition = 5;
+
+    for (int i = 0; i < frame->numberOfMarkers; i++) {
+        Marker* marker = malloc(sizeof(Marker));
+
+        marker->x = getDoubleFromLine(line, initialPosition++);
+        marker->y = getDoubleFromLine(line, initialPosition++);
+        marker->z = getDoubleFromLine(line, initialPosition++);
+
+        //jump another one
+        initialPosition++;
+
+        //attach into the matrix
+        frame->markers[i] = marker;
+
+        printf("pos %d: %p, x: %.10f, y: %.10f, z: %.10f\n", i, marker, marker->x, marker->y, marker->z);
+    }
+}
+
+void loadFrames(FILE* fp) {
+    char line[TAM_LINE];
+
+    for (int i = 0; i < G_F.numberOfFrames; i++) {
+        Frame* frame = malloc(sizeof(Frame));
+
+        //read line
+        fgets(line, TAM_LINE -1, fp);
+
+        //get values
+        frame->time = getDoubleFromLine(&line, 2);
+        frame->numberOfMarkers = getIntFromLine(&line, 4);
+        frame->markers = malloc(sizeof(Marker*) * frame->numberOfMarkers);
+
+        //attach into the matrix
+        G_F.frames[i] = frame;
+
+        printf("position %d: %p, time: %.10f, numberOfMarkers: %d\n", i, frame, frame->time, frame->numberOfMarkers);
+
+        //get markers
+        loadMarkersOfFrame(frame, line);
+    }
 }
 
 void loadSegments(FILE* fp) {
     char line[TAM_LINE];
 
-    for (int i = 0; i < numberOfSegments; i++) {
+    for (int i = 0; i < G_S.numberOfSegments; i++) {
         Segmento* segment = malloc(sizeof(Segmento));
 
         //read line
@@ -76,9 +135,9 @@ void loadSegments(FILE* fp) {
         segment->verticeFinal = getIntFromLine(&line, 2);
 
         //insert the memory position in the pointer
-        segments[i] = segment;
+        G_S.segments[i] = segment;
 
-        printf("position %d: %p, inicio: %d, fim: %d\n", i, segments[i], segments[i]->verticeInicial, segments[i]->verticeFinal);
+        printf("position %d: %p, inicio: %d, fim: %d\n", i, segment, segment->verticeInicial, segment->verticeFinal);
     }
 }
 
@@ -94,8 +153,7 @@ void loadFileAndInitializeVars() {
     loadNumberOfFrames(fp);
 
     //load frames
-    for (int i = 0; i < numberOfFrames; i++)
-        fgets(line, TAM_LINE -1, fp);
+    loadFrames(fp);
 
     //get number of segments
     loadNumberOfSegments(fp);
@@ -104,4 +162,12 @@ void loadFileAndInitializeVars() {
     loadSegments(fp);
 
     fclose(fp);
+}
+
+Segments* getSegments() {
+    return &G_S;
+}
+
+Frames* getFrames() {
+    return &G_F;
 }

@@ -364,10 +364,21 @@ void init(void)
 //
 // **********************************************************************
 int main ( int argc, char** argv ) {
+    Frames* frames;
+    Segments* segments;
+
+    //check the example file path
     checkFilePath();
+
+    //load file and initialize the vars
     loadFileAndInitializeVars();
 
-    exit(0);
+    //get the references
+    frames = getFrames();
+    segments = getSegments();
+
+    printf("Number of frames: %d.\n", frames->numberOfFrames);
+    printf("Number of segments: %d.\n", segments->numberOfSegments);
 
     glutInit            ( &argc, argv );
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
