@@ -83,9 +83,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="examples/small.spd" />
+		<Unit filename="filemanipulation.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="filemanipulation.h" />
+		<Unit filename="global.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="strmanipulation.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="strmanipulation.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

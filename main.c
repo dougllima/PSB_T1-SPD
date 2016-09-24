@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "filemanipulation.h"
+#include "global.h"
 
 #ifdef WIN32
 #include <windows.h>    // includes only in MSWindows not in UNIX
@@ -29,8 +31,6 @@ typedef struct {
 
 GLfloat ratio;
 GLfloat angY, angX;
-
-#define TAM_MAX 20
 
 Ponto Marcadores3D[TAM_MAX];
 Segmento Ligacoes[TAM_MAX];
@@ -60,7 +60,7 @@ void GeraPontosAleatorios()
         Marcadores3D[i].x = x;
         Marcadores3D[i].y = y;
         Marcadores3D[i].z = z;
-        printf("%f %f %f\n", x,y,z);
+        //printf("%f %f %f\n", x,y,z);
     }
     // Define a posição para Alvo e Observador em função dos pontos gerados
     Marcadores3D[1].x = 1;
@@ -80,7 +80,7 @@ void GeraPontosAleatorios()
         fim = rand() % TAM_MAX;
         Ligacoes[i].verticeInicial = inicio;
         Ligacoes[i].verticeFinal = fim;
-        printf("%d %d\n",inicio,fim);
+        //printf("%d %d\n",inicio,fim);
     }
 
 }
@@ -121,7 +121,7 @@ void DesenhaSegmento(Ponto P1, Ponto P2)
 // **********************************************************************
 void DesenhaVetorSegmentos(Segmento V[], int qtd)
 {
-    printf("=========\n");
+    //printf("=========\n");
     Ponto P1, P2;
     int inicio, fim;
     int i;
@@ -132,7 +132,7 @@ void DesenhaVetorSegmentos(Segmento V[], int qtd)
         P1 = Marcadores3D[inicio];
         P2 = Marcadores3D[fim];
         DesenhaSegmento(P1, P2);
-        printf("%d %d\n", inicio, fim);
+        //printf("%d %d\n", inicio, fim);
     }
 }
 
@@ -361,13 +361,16 @@ void init(void)
     angY = 0.0;
 
 }
+
 // **********************************************************************
 //  void main ( int argc, char** argv )
 //
 //
 // **********************************************************************
-int main ( int argc, char** argv )
-{
+int main ( int argc, char** argv ) {
+    checkFilePath();
+    loadFileAndInitializeVars();
+
     glutInit            ( &argc, argv );
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
     glutInitWindowPosition (0,0);

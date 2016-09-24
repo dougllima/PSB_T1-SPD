@@ -347,3 +347,33 @@
 	<GLUT/glut.h>
 	<GL/glut.h>
 
+1474666772 source:/home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/main.c
+	<stdio.h>
+	<stdlib.h>
+	"filemanipulation.h"
+	"global.h"
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
+1474665216 /home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/filemanipulation.c
+	<stdio.h>
+	<stdlib.h>
+	"global.h"
+
+1474665522 /home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/global.h
+
+1474668535 source:/home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/filemanipulation.c
+	<stdio.h>
+	<stdlib.h>
+	"global.h"
+
+1474666710 /home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/filemanipulation.h
+
+1474668450 source:/home/PORTOALEGRE/11100115/Desktop/PSB_T1-SPD-master/strmanipulation.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"global.h"
+
