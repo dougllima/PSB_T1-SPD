@@ -1,8 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "global.h"
+#include "strmanipulation.h"
 
 char relativeSPDFilePath[TAM_STRING] = "examples/small.spd";
+Segmento** segments;
+int numberOfFrames;
+int numberOfSegments;
+
+int isValidFile(char file[]) {
+    FILE* fp = fopen(file, "r");
+
+    return (fp == NULL ? 0 : 1);
+}
 
 void checkFilePath() {
     if (isValidFile(relativeSPDFilePath) == 0) {
@@ -11,29 +21,87 @@ void checkFilePath() {
     }
 }
 
-int isValidFile(char file[]) {
-    FILE* fp = fopen(file, "r");
+int getIntFromLine(char* line, int blankSpaces) {
+    char* value;
+    int retValue;
 
-    return (fp == NULL ? 0 : 1);
+    //get value in line
+    value = getNextValue(line, blankSpaces);
+
+    //parse
+    retValue = atoi(value);
+
+    return retValue;
+
+}
+
+void loadNumberOfFrames(FILE* fp) {
+    char line[TAM_LINE];
+
+    //read line
+    fgets(line, TAM_LINE -1, fp);
+
+    //parse to int
+    numberOfFrames = getIntFromLine(&line, 2);
+
+    printf("frames: %d\n", numberOfFrames);
+}
+
+void loadNumberOfSegments(FILE* fp) {
+    char line[TAM_LINE];
+
+    //read line
+    fgets(line, TAM_LINE -1, fp);
+
+    //parse to int
+    numberOfSegments = getIntFromLine(&line, 1);
+
+    //alloc memory space to handle it
+    segments = malloc(numberOfSegments * sizeof(Segmento));
+
+    printf("segments: %d\n", numberOfSegments);
+}
+
+void loadSegments(FILE* fp) {
+    char line[TAM_LINE];
+
+    for (int i = 0; i < numberOfSegments; i++) {
+        Segmento* segment = malloc(sizeof(Segmento));
+
+        //read line
+        fgets(line, TAM_LINE -1, fp);
+
+        //get values
+        segment->verticeInicial = getIntFromLine(&line, 1);
+        segment->verticeFinal = getIntFromLine(&line, 2);
+
+        //insert the memory position in the pointer
+        segments[i] = segment;
+
+        printf("position %d: %p, inicio: %d, fim: %d\n", i, segments[i], segments[i]->verticeInicial, segments[i]->verticeFinal);
+    }
 }
 
 void loadFileAndInitializeVars() {
     FILE* fp = fopen(relativeSPDFilePath, "r");
     char line[TAM_LINE];
 
-    //ignore first two lines
-    fgets(line, TAM_LINE -1, fp);
-    fgets(line, TAM_LINE -1, fp);
+    //ignore first five lines
+    for (int i = 0; i < 5; i++)
+        fgets(line, TAM_LINE -1, fp);
 
-    //3rd line (START)
-    fgets(line, TAM_LINE -1, fp);
-    char *start;
-    start = getNextValue(&line, 1);
+    //get number of frames
+    loadNumberOfFrames(fp);
 
-    printf("start: %s\n", start);
+    //load frames
+    for (int i = 0; i < numberOfFrames; i++)
+        fgets(line, TAM_LINE -1, fp);
 
+    //get number of segments
+    loadNumberOfSegments(fp);
 
-    //4th line (END)
+    //load segments
+    loadSegments(fp);
 
     fclose(fp);
 }

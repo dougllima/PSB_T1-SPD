@@ -25,10 +25,6 @@ typedef struct{
     float x,y,z;
 } Ponto;
 
-typedef struct {
-    int verticeInicial, verticeFinal;
-} Segmento;
-
 GLfloat ratio;
 GLfloat angY, angX;
 
@@ -371,7 +367,7 @@ int main ( int argc, char** argv ) {
     checkFilePath();
     loadFileAndInitializeVars();
 
-    //exit(0);
+    exit(0);
 
     glutInit            ( &argc, argv );
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );

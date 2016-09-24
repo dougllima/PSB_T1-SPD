@@ -7,6 +7,7 @@
 char* getNextValue(char* line, int spacesToIgnore) {
     char* ref = line;
     char* tok;
+    char teste[TAM_LINE];
 
     do {
         //find the first occurence of blank space
@@ -23,10 +24,12 @@ char* getNextValue(char* line, int spacesToIgnore) {
 
     //after here, we do know where the string should start
 
-    //get the entire string until we find either a blank space or a new line
-    tok = strtok(ref, " ");
-    tok = strtok(ref, "\n");
+    //make a copy of the string
+    strcpy(teste, ref);
 
-    //copy the string and produce a new one
-    return strdup(tok);
+    //get the entire string until we find either a blank space or a new line
+    tok = strtok(teste, " ");
+    tok = strtok(teste, "\n");
+
+    return tok;
 }
