@@ -33,11 +33,49 @@ Segmento Ligacoes[TAM_MAX];
 Ponto Obs, Alvo;
 Ponto ObsIni;
 
+Frames* frames;
+Segments* segments;
+
+double actualTime = 0;
+int actualFrame = 0;
+int lastFrame;
+int markers;
+int segmentsQtn;
+
 int width,height;
 float deltax=0, deltay=0;
 GLfloat angle=60, fAspect=1.0;
 GLfloat rotX=0, rotY=0, rotX_ini=0, rotY_ini=0;
 int x_ini=0,y_ini=0,bot=0;
+
+void MountActualFrame(Frames* frames, Segments* segments){
+    lastFrame = frames->numberOfFrames -1;
+    Frame f;
+
+    f = *frames->frames[actualFrame];
+    markers = f.numberOfMarkers;
+
+    segmentsQtn = segments->numberOfSegments;
+
+    for(int i = markers-1; i>=0; i--){
+        Marcadores3D[i].x = (float)f.markers[i]->x;
+        Marcadores3D[i].y = (float)f.markers[i]->y;
+        Marcadores3D[i].z = (float)f.markers[i]->z;
+    }
+
+    for(int i = segmentsQtn-1; i>=0; i--){
+        Ligacoes[i].verticeFinal = segments->segments[i]->verticeFinal;
+        Ligacoes[i].verticeInicial = segments->segments[i]->verticeInicial;
+    }
+}
+
+void setObservatorPosition(){
+    Obs.x = 0;
+    Obs.y = 0.5;
+    Obs.z = -2.7;
+    rotX = 54;
+    rotY = -7;
+}
 
 // **********************************************************************
 //  Gera um conjunto de pontos aleatorio e armazena este pontos
@@ -121,6 +159,7 @@ void DesenhaVetorSegmentos(Segmento V[], int qtd)
     Ponto P1, P2;
     int inicio, fim;
     int i;
+    // TODO (Douglas#1#): Relacionar Ligação com o ID do Marcador, não com a posição no vetor.
     for (i=0; i<qtd; i++)
     {
         inicio = Ligacoes[i].verticeInicial;
@@ -166,13 +205,13 @@ void DesenhaEixos()
     glBegin(GL_LINES);
     glColor3f(1,0,0); // vermelho
 
-    glVertex3f(0,0,0); // Eixo X
+    glVertex3f(-5,0,0); // Eixo X
     glVertex3f(5,0,0);
 
     glVertex3f(0,0,0); // Eixo Y
     glVertex3f(0,5,0);
 
-    glVertex3f(0,0,0); // Eixo X
+    glVertex3f(0,0,-5); // Eixo X
     glVertex3f(0,0,5);
     glEnd();
 
@@ -287,9 +326,11 @@ void display( void )
     glPushMatrix();
     //glRotatef(angX,1,0,0);
     glRotatef(angY,0,1,0);
-    glColor3f(1.0f,1.0,0.0f); // amarelo
-    DesenhaVetorPontos(Marcadores3D,TAM_MAX);
-    DesenhaVetorSegmentos(Ligacoes, TAM_MAX);
+    glColor3f(0.0f,1.0f,0.0f); // Verde
+    //Alterando a quantidade de pontos passada por parametro
+    DesenhaVetorPontos(Marcadores3D, markers);
+    glColor3f(1.0f,0.0f,1.0f); //
+    DesenhaVetorSegmentos(Ligacoes, segmentsQtn);
     glPopMatrix();
 
     glutSwapBuffers();
@@ -335,6 +376,44 @@ void arrow_keys ( int a_keys, int x, int y )
             angY = 360;
         glutPostRedisplay();
         break;
+    case GLUT_KEY_F1:
+        actualFrame = 0;
+        MountActualFrame(frames, segments);
+        display();
+        break;
+    case GLUT_KEY_F2:
+        if(actualFrame > 0){
+            actualFrame--;
+            MountActualFrame(frames, segments);
+            display();
+        }
+        break;
+    case GLUT_KEY_F3:
+        actualFrame = 0;
+        while(actualFrame <= lastFrame){
+            int sleepTime = (int)((frames->frames[actualFrame]->time - actualTime) * 1000);
+
+            actualTime = frames->frames[actualFrame]->time;
+
+            MountActualFrame(frames, segments);
+            display();
+            actualFrame++;
+
+            Sleep(sleepTime);
+        }
+        break;
+    case GLUT_KEY_F4:
+        if(actualFrame < lastFrame){
+            actualFrame++;
+            MountActualFrame(frames, segments);
+            display();
+        }
+        break;
+    case GLUT_KEY_F5:
+            actualFrame = lastFrame;
+            MountActualFrame(frames, segments);
+            display();
+        break;
     default:
         break;
     }
@@ -364,9 +443,6 @@ void init(void)
 //
 // **********************************************************************
 int main ( int argc, char** argv ) {
-    Frames* frames;
-    Segments* segments;
-
     //check the example file path
     checkFilePath();
 
@@ -394,7 +470,8 @@ int main ( int argc, char** argv ) {
     // executa algumas inicializações
     init ();
 
-    GeraPontosAleatorios();
+    setObservatorPosition();
+    MountActualFrame(frames, segments);
 
     // Define que o tratador de evento para
     // o redesenho da tela. A funcao "display"

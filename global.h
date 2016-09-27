@@ -10,6 +10,7 @@ typedef struct {
 } Segmento;
 
 typedef struct {
+    int id;
     double x, y, z;
 } Marker;
 

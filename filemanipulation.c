@@ -3,7 +3,7 @@
 #include "global.h"
 #include "strmanipulation.h"
 
-char relativeSPDFilePath[TAM_STRING] = "examples/small.spd";
+char relativeSPDFilePath[TAM_STRING] = "examples/big1.spd";
 
 Segments G_S;
 Frames G_F;
@@ -83,12 +83,13 @@ void loadMarkersOfFrame(Frame* frame, char* line) {
     for (int i = 0; i < frame->numberOfMarkers; i++) {
         Marker* marker = malloc(sizeof(Marker));
 
+
         marker->x = getDoubleFromLine(line, initialPosition++);
         marker->y = getDoubleFromLine(line, initialPosition++);
         marker->z = getDoubleFromLine(line, initialPosition++);
 
-        //jump another one
-        initialPosition++;
+        //get the id, so we can link the segment
+        marker->id = getIntFromLine(line, initialPosition++);
 
         //attach into the matrix
         frame->markers[i] = marker;

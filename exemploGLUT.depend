@@ -377,3 +377,45 @@
 	<string.h>
 	"global.h"
 
+1475002478 source:c:\users\douglas\documents\pucrs\psb_t1-spd\filemanipulation.c
+	<stdio.h>
+	<stdlib.h>
+	"global.h"
+	"strmanipulation.h"
+
+1474999900 c:\users\douglas\documents\pucrs\psb_t1-spd\global.h
+
+1474986279 c:\users\douglas\documents\pucrs\psb_t1-spd\strmanipulation.h
+
+1475002505 source:c:\users\douglas\documents\pucrs\psb_t1-spd\main.c
+	<stdio.h>
+	<stdlib.h>
+	"filemanipulation.h"
+	"global.h"
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
+1474986279 c:\users\douglas\documents\pucrs\psb_t1-spd\filemanipulation.h
+
+1474464149 c:\users\douglas\documents\pucrs\psb_t1-spd\include\gl\glut.h
+	"freeglut.h"
+
+1474464149 c:\users\douglas\documents\pucrs\psb_t1-spd\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1474464149 c:\users\douglas\documents\pucrs\psb_t1-spd\include\gl\freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1474464149 c:\users\douglas\documents\pucrs\psb_t1-spd\include\gl\freeglut_ext.h
+
+1474986279 source:c:\users\douglas\documents\pucrs\psb_t1-spd\strmanipulation.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"global.h"
+

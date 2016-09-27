@@ -83,6 +83,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="examples/1.spd" />
+		<Unit filename="examples/big1.spd" />
+		<Unit filename="examples/big2.spd" />
 		<Unit filename="examples/small.spd" />
 		<Unit filename="filemanipulation.c">
 			<Option compilerVar="CC" />
