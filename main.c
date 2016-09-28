@@ -21,7 +21,8 @@
 #include <GL/glut.h>
 #endif
 
-typedef struct{
+typedef struct
+{
     float x,y,z;
 } Ponto;
 
@@ -38,9 +39,9 @@ Segments* segments;
 
 double actualTime = 0;
 int actualFrame = 0;
+int segmentsQtn;
 int lastFrame;
 int markers;
-int segmentsQtn;
 
 int width,height;
 float deltax=0, deltay=0;
@@ -48,76 +49,54 @@ GLfloat angle=60, fAspect=1.0;
 GLfloat rotX=0, rotY=0, rotX_ini=0, rotY_ini=0;
 int x_ini=0,y_ini=0,bot=0;
 
-void MountActualFrame(Frames* frames, Segments* segments){
+// **********************************************************************
+//  Monta os marcadores do frame atual
+// **********************************************************************
+void MountActualFrame(Frames* frames)
+{
+    memset(Marcadores3D,0,sizeof(Marcadores3D));
+
     lastFrame = frames->numberOfFrames -1;
     Frame f;
 
     f = *frames->frames[actualFrame];
     markers = f.numberOfMarkers;
 
+    for(int i = markers-1; i>=0; i--)
+    {
+        int j = f.markers[i]->id;
+        Marcadores3D[j].x = (float)f.markers[i]->x;
+        Marcadores3D[j].y = (float)f.markers[i]->y;
+        Marcadores3D[j].z = (float)f.markers[i]->z;
+    }
+}
+
+// **********************************************************************
+//  Define os segmentos para o filme escolhido
+// **********************************************************************
+void setSegments(Segments* segments)
+{
     segmentsQtn = segments->numberOfSegments;
 
-    for(int i = markers-1; i>=0; i--){
-        Marcadores3D[i].x = (float)f.markers[i]->x;
-        Marcadores3D[i].y = (float)f.markers[i]->y;
-        Marcadores3D[i].z = (float)f.markers[i]->z;
-    }
-
-    for(int i = segmentsQtn-1; i>=0; i--){
+    for(int i = segmentsQtn-1; i>=0; i--)
+    {
         Ligacoes[i].verticeFinal = segments->segments[i]->verticeFinal;
         Ligacoes[i].verticeInicial = segments->segments[i]->verticeInicial;
     }
 }
 
-void setObservatorPosition(){
-    Obs.x = 0;
-    Obs.y = 0.5;
-    Obs.z = -2.7;
-    rotX = 54;
-    rotY = -7;
-}
-
 // **********************************************************************
-//  Gera um conjunto de pontos aleatorio e armazena este pontos
-//  em um vetor
+//  Define a posição de observação inicial
 // **********************************************************************
-void GeraPontosAleatorios()
+void setObservatorPosition()
 {
-    int i;
-    srand(time(0));
-    for (i=0; i< TAM_MAX; i++)
-    {
-        float x,y,z;
-        x = (rand() % 10000)/10000.0 - 0.1;
-        y = (rand() % 10000)/10000.0 - 0.1;
-        z = (rand() % 10000)/10000.0 - 0.1;
-        Marcadores3D[i].x = x;
-        Marcadores3D[i].y = y;
-        Marcadores3D[i].z = z;
-        //printf("%f %f %f\n", x,y,z);
-    }
-    // Define a posição para Alvo e Observador em função dos pontos gerados
-    Marcadores3D[1].x = 1;
-    Marcadores3D[1].y = 1;
-    Marcadores3D[1].z = 1;
     Obs.x = 0;
     Obs.y = 0.5;
-    Obs.z = -2.7;
-    rotX = 54;
-    rotY = -7;
-
-    // Gera as ligações
-    for (i=0; i< TAM_MAX; i++)
-    {
-        int inicio, fim;
-        inicio = rand() % TAM_MAX;
-        fim = rand() % TAM_MAX;
-        Ligacoes[i].verticeInicial = inicio;
-        Ligacoes[i].verticeFinal = fim;
-        //printf("%d %d\n",inicio,fim);
-    }
-
+    Obs.z = -2;
+    rotX = 50;
+    rotY = 180;
 }
+
 // **********************************************************************
 //  Desenha um ponto em 3D
 // **********************************************************************
@@ -125,7 +104,7 @@ void DesenhaPonto(Ponto P)
 {
     glPointSize(3);
     glBegin(GL_POINTS);
-        glVertex3f(P.x, P.y, P.z);
+    glVertex3f(P.x, P.y, P.z);
     glEnd();
 }
 // **********************************************************************
@@ -145,8 +124,8 @@ void DesenhaVetorPontos(Ponto V[], int qtd)
 void DesenhaSegmento(Ponto P1, Ponto P2)
 {
     glBegin(GL_LINES);
-        glVertex3f(P1.x, P1.y, P1.z);
-        glVertex3f(P2.x, P2.y, P2.z);
+    glVertex3f(P1.x, P1.y, P1.z);
+    glVertex3f(P2.x, P2.y, P2.z);
     glEnd();
 
 }
@@ -159,7 +138,6 @@ void DesenhaVetorSegmentos(Segmento V[], int qtd)
     Ponto P1, P2;
     int inicio, fim;
     int i;
-    // TODO (Douglas#1#): Relacionar Ligação com o ID do Marcador, não com a posição no vetor.
     for (i=0; i<qtd; i++)
     {
         inicio = Ligacoes[i].verticeInicial;
@@ -205,14 +183,14 @@ void DesenhaEixos()
     glBegin(GL_LINES);
     glColor3f(1,0,0); // vermelho
 
-    glVertex3f(-5,0,0); // Eixo X
-    glVertex3f(5,0,0);
+    glVertex3f(0,0,0); // Eixo X
+    glVertex3f(0,0,0);
 
     glVertex3f(0,0,0); // Eixo Y
-    glVertex3f(0,5,0);
+    glVertex3f(0,0,0);
 
-    glVertex3f(0,0,-5); // Eixo X
-    glVertex3f(0,0,5);
+    glVertex3f(0,0,0); // Eixo X
+    glVertex3f(0,0,0);
     glEnd();
 
 }
@@ -220,17 +198,17 @@ void DesenhaEixos()
 // Função callback para eventos de botões do mouse
 void mouse(int button, int state, int x, int y)
 {
-	if(state==GLUT_DOWN)
-	{
-		// Salva os parâmetros atuais
-		x_ini = x;
-		y_ini = y;
-		ObsIni = Obs;
-		rotX_ini = rotX;
-		rotY_ini = rotY;
-		bot = button;
-	}
-	else bot = -1;
+    if(state==GLUT_DOWN)
+    {
+        // Salva os parâmetros atuais
+        x_ini = x;
+        y_ini = y;
+        ObsIni = Obs;
+        rotX_ini = rotX;
+        rotY_ini = rotY;
+        bot = button;
+    }
+    else bot = -1;
 }
 
 // Função callback para eventos de movimento do mouse
@@ -238,28 +216,28 @@ void mouse(int button, int state, int x, int y)
 #define SENS_OBS	20.0
 void move(int x, int y)
 {
-	// Botão esquerdo ?
-	if(bot==GLUT_LEFT_BUTTON)
-	{
-		// Calcula diferenças
-		int deltax = x_ini - x;
-		int deltay = y_ini - y;
-		// E modifica ângulos
-		rotY = rotY_ini - deltax/SENS_ROT;
-		rotX = rotX_ini - deltay/SENS_ROT;
-	}
-	// Botão direito ?
-	else if(bot==GLUT_RIGHT_BUTTON)
-	{
-		// Calcula diferença
-		int deltaz = y_ini - y;
-		// E modifica distância do observador
-		//Obs.x = x;
-		//Obs.y = y;
-		Obs.z = ObsIni.z - deltaz/SENS_OBS;
-	}
-	//PosicionaObservador();
-	glutPostRedisplay();
+    // Botão esquerdo ?
+    if(bot==GLUT_LEFT_BUTTON)
+    {
+        // Calcula diferenças
+        int deltax = x_ini - x;
+        int deltay = y_ini - y;
+        // E modifica ângulos
+        rotY = rotY_ini - deltax/SENS_ROT;
+        rotX = rotX_ini - deltay/SENS_ROT;
+    }
+    // Botão direito ?
+    else if(bot==GLUT_RIGHT_BUTTON)
+    {
+        // Calcula diferença
+        int deltaz = y_ini - y;
+        // E modifica distância do observador
+        //Obs.x = x;
+        //Obs.y = y;
+        Obs.z = ObsIni.z - deltaz/SENS_OBS;
+    }
+    //PosicionaObservador();
+    glutPostRedisplay();
 }
 
 // **********************************************************************
@@ -277,9 +255,9 @@ void PosicUser()
     glLoadIdentity();
 
     // Especifica posição do observador e do alvo
-	glTranslatef(Obs.x, Obs.y, Obs.z);
-	glRotatef(rotX,1,0,0);
-	glRotatef(rotY,0,1,0);
+    glTranslatef(Obs.x, Obs.y, Obs.z);
+    glRotatef(rotX,1,0,0);
+    glRotatef(rotY,0,1,0);
 
 }
 // **********************************************************************
@@ -326,10 +304,12 @@ void display( void )
     glPushMatrix();
     //glRotatef(angX,1,0,0);
     glRotatef(angY,0,1,0);
-    glColor3f(0.0f,1.0f,0.0f); // Verde
-    //Alterando a quantidade de pontos passada por parametro
+    glColor3f(1.0f,1.0f,0.0f); // Verde
+
+    /* == Passando a quantidade de marcadores do frame por parametro
+        para evitar problema nos frames com marcadores a menos == */
     DesenhaVetorPontos(Marcadores3D, markers);
-    glColor3f(1.0f,0.0f,1.0f); //
+    glColor3f(1.0f,0.0f,0.0f);
     DesenhaVetorSegmentos(Ligacoes, segmentsQtn);
     glPopMatrix();
 
@@ -378,24 +358,26 @@ void arrow_keys ( int a_keys, int x, int y )
         break;
     case GLUT_KEY_F1:
         actualFrame = 0;
-        MountActualFrame(frames, segments);
+        MountActualFrame(frames);
         display();
         break;
     case GLUT_KEY_F2:
-        if(actualFrame > 0){
+        if(actualFrame > 0)
+        {
             actualFrame--;
-            MountActualFrame(frames, segments);
+            MountActualFrame(frames);
             display();
         }
         break;
     case GLUT_KEY_F3:
         actualFrame = 0;
-        while(actualFrame <= lastFrame){
+        while(actualFrame <= lastFrame)
+        {
             int sleepTime = (int)((frames->frames[actualFrame]->time - actualTime) * 1000);
 
             actualTime = frames->frames[actualFrame]->time;
 
-            MountActualFrame(frames, segments);
+            MountActualFrame(frames);
             display();
             actualFrame++;
 
@@ -403,16 +385,17 @@ void arrow_keys ( int a_keys, int x, int y )
         }
         break;
     case GLUT_KEY_F4:
-        if(actualFrame < lastFrame){
+        if(actualFrame < lastFrame)
+        {
             actualFrame++;
-            MountActualFrame(frames, segments);
+            MountActualFrame(frames);
             display();
         }
         break;
     case GLUT_KEY_F5:
-            actualFrame = lastFrame;
-            MountActualFrame(frames, segments);
-            display();
+        actualFrame = lastFrame;
+        MountActualFrame(frames);
+        display();
         break;
     default:
         break;
@@ -442,7 +425,8 @@ void init(void)
 //
 //
 // **********************************************************************
-int main ( int argc, char** argv ) {
+int main ( int argc, char** argv )
+{
     //check the example file path
     checkFilePath();
 
@@ -471,7 +455,8 @@ int main ( int argc, char** argv ) {
     init ();
 
     setObservatorPosition();
-    MountActualFrame(frames, segments);
+    setSegments(segments);
+    MountActualFrame(frames);
 
     // Define que o tratador de evento para
     // o redesenho da tela. A funcao "display"
@@ -506,10 +491,10 @@ int main ( int argc, char** argv ) {
     glutSpecialFunc ( arrow_keys );
 
     // Registra a função callback para eventos de botões do mouse
-	glutMouseFunc(mouse);
+    glutMouseFunc(mouse);
 
-	// Registra a função callback para eventos de movimento do mouse
-	glutMotionFunc(move);
+    // Registra a função callback para eventos de movimento do mouse
+    glutMotionFunc(move);
 
     // inicia o tratamento dos eventos
     glutMainLoop ( );

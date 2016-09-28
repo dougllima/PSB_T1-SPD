@@ -377,7 +377,7 @@
 	<string.h>
 	"global.h"
 
-1475002478 source:c:\users\douglas\documents\pucrs\psb_t1-spd\filemanipulation.c
+1475086299 source:c:\users\douglas\documents\pucrs\psb_t1-spd\filemanipulation.c
 	<stdio.h>
 	<stdlib.h>
 	"global.h"
@@ -387,7 +387,7 @@
 
 1474986279 c:\users\douglas\documents\pucrs\psb_t1-spd\strmanipulation.h
 
-1475002505 source:c:\users\douglas\documents\pucrs\psb_t1-spd\main.c
+1475087565 source:c:\users\douglas\documents\pucrs\psb_t1-spd\main.c
 	<stdio.h>
 	<stdlib.h>
 	"filemanipulation.h"

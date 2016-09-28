@@ -3,7 +3,7 @@
 #include "global.h"
 #include "strmanipulation.h"
 
-char relativeSPDFilePath[TAM_STRING] = "examples/big1.spd";
+char relativeSPDFilePath[TAM_STRING] = "examples/1.spd";
 
 Segments G_S;
 Frames G_F;
